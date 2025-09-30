@@ -1,0 +1,35 @@
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: Qwerty123!
+    container_name: db_redmine
+    volumes:
+      - database:/var/lib/postgresql/data
+
+  redmine:
+    image: redmine:5.1-alpine
+    environment:
+      - REDMINE_DB_POSTGRES=db
+      - REDMINE_DB_PASSWORD=Qwerty123!
+    ports:
+      - 9999:3000
+    volumes:
+      - files:/usr/src/redmine/files
+    depends_on:
+      - db
+  adminer:
+    image: adminer:4
+    restart: always
+    environment:
+      - ADMINER_DESIGN=galkaev
+      - ADMINER_DEFAULT_DB=db
+    ports:
+      - 8083:8080
+
+
+volumes:
+  database:
+  files:
+  

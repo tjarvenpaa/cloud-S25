@@ -1,0 +1,8 @@
+services:
+  yt-dlp-ubuntu:
+    image: yt-dlp
+    build: .
+    volumes:
+      - .:/omadir
+    container_name: yt-dlp
+    

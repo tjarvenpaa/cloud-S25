@@ -1,0 +1,16 @@
+services:
+  db:
+    image: postgres:13.2-alpine
+    networks:
+      - database-network
+      - default
+
+networks:
+  database-network:
+    external:
+      name: database-network
+    
+
+  default:
+    external:
+      name: my-predefined-network
